@@ -97,6 +97,8 @@ def classify(text):
     idx = out.argmax()
     print(idx2label[idx])
     
+'''    
 while True:
     text = input('Digite algo: ')
     classify(text)
+'''

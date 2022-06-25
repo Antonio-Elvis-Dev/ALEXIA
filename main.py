@@ -1,3 +1,4 @@
+from html import entities
 from unittest import result
 from vosk import Model, KaldiRecognizer
 import os
@@ -5,6 +6,7 @@ import pyaudio
 import pyttsx3
 import json
 import core
+from nlu.model import classify
 
 engine = pyttsx3.init()  # sintaxe de fala
 
@@ -16,6 +18,25 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+
+def evaluate(text):
+    
+    # reconhecer entidade do texto
+    entity = classify(text)
+    
+    if entity == 'time\\getTime':
+        speak(core.SystemInfo.get_time())
+    elif entity == 'time\\get_Date':
+        speak(core.SystemInfo.get_date())
+        
+    # Abrir programas
+    elif entity == 'open\\notepad':
+        speak('Abrindo o bloco de notas')
+        os.system('notepad.exe')    
+        
+    print('Text: {} Entity: {}'.format(text, entity))
+    
+    
 # reconhecimento de fala
 
 
@@ -39,9 +60,6 @@ while True:
 
         if result is not None:
             text = result['text']
+            evaluate(text)
 
-            print(text)
-            
-            if text == 'que horas são' or text == 'me diga as horas':
-                speak(core.SystemInfo.get_time())
             

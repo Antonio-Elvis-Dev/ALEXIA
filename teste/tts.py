@@ -4,7 +4,7 @@ engine = pyttsx3.init()
 
 voices = engine.getProperty('voices')
 
-engine.setProperty('voice', voices[-1].id)
-
-engine.say("Eu vou falar este texto!")
-engine.runAndWait()
+for voice in voices:
+    if voice.name == 'brazil':
+        engine.setProperty('voice', voice.id)
+        engine.say('Olá bom dia')

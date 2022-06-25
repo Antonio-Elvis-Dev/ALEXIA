@@ -32,13 +32,13 @@ commands:
     #OPEN
 
   - command:
-    input: Abrir google.
+    input: Abrir bloco de notas.
     entity: open
-    action: 
+    action: notepad
   - command:
-    input: youtube.
-    entity: weather
-    action: 
+    input: abrir explorador de arquivos.
+    entity: open
+    action: explorer
     
     
     
